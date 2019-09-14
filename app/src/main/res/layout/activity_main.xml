@@ -7,6 +7,19 @@
     tools:context=".MainActivity"
     android:id="@+id/view_layout">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -24,9 +37,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_deleteall" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
+    <include layout="@layout/content_main" />
 
 
 

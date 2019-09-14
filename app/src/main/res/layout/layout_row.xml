@@ -37,17 +37,17 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:backgroundTint="#00FFFFF"
                 android:src="@drawable/ic_leftarrow" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/showText"
+                android:layout_below="@+id/text"
                 android:layout_alignParentEnd="true"
                 android:textSize="12sp"
-                tools:text="giorno/mese/anno ora:minuti" />
+                android:layout_marginTop="4dp"
+                tools:text="@string/date" />
 
             <TextView
                 android:id="@+id/text"

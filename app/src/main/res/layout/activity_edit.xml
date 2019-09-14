@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".EditActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/toolbar">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="30dp"
+                android:textColorHint="@color/titleColor">
+                <EditText
+                    android:maxLength="32"
+                    android:hint="@string/hintTitle"
+                    android:id="@+id/editTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:importantForAutofill="no"
+                    android:inputType="textImeMultiLine"
+                    android:textColor="@color/titleColor"
+                    android:textSize="30sp"
+                    android:layout_marginBottom="4dp"
+                    android:textColorHint="@color/titleColor"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:layout_marginBottom="4dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_weight="1"
+                        android:id="@+id/deleteButton"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:elevation="6dp"
+                        android:text="@string/delete"
+                        android:textAlignment="textStart"
+                        android:textAppearance="@style/Widget.MaterialComponents.Button.Icon"
+                        android:textColor="@color/titleColor"
+                        android:textSize="18sp"
+                        app:icon="@drawable/ic_delete"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:strokeWidth="1dp"
+                        android:layout_marginEnd="4dp"/>
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_weight="1"
+                        android:id="@+id/iconButton"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:elevation="6dp"
+                        android:text="@string/icon"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="@style/Widget.MaterialComponents.Button.Icon"
+                        android:textColor="@color/titleColor"
+                        android:textSize="18sp"
+                        app:icon="@drawable/ic_icon"
+                        app:iconGravity="textStart"
+                        app:strokeWidth="1dp"
+                        />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_weight="1"
+                        android:id="@+id/colorButton"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:elevation="6dp"
+                        android:text="@string/color"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="@style/Widget.MaterialComponents.Button.Icon"
+                        android:textColor="@color/titleColor"
+                        android:textSize="18sp"
+                        app:icon="@drawable/ic_brush"
+                        app:iconGravity="textStart"
+                        app:strokeWidth="1dp"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_edit" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
