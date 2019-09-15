@@ -70,14 +70,19 @@ public class EditActivity extends AppCompatActivity {
                 showAlert("Conferma Cancellazione","Vuoi davvero cancellare la tua nota?");
             }
         });
+
         appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                if (state == State.COLLAPSED) {
+                if (state == State.COLLAPSED && !(note == null)) {
                     collapsingToolbarLayout.setTitle(note.getTitle());
                     collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.AppTheme_PopupOverlay);
-                } else
-                    collapsingToolbarLayout.setTitle(" "); // spazio obbligatorio per annullare scritta nella toolbar
+                } else if (state == State.COLLAPSED)
+                    collapsingToolbarLayout.setTitle(editTitle.getText()); // spazio obbligatorio per annullare scritta nella toolbar
+                else {
+                    collapsingToolbarLayout.setTitle(" ");
+                    collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.AppTheme_PopupOverlay);
+                }
             }
         });
     }
@@ -97,13 +102,12 @@ public class EditActivity extends AppCompatActivity {
         bundle.putParcelable(NOTE_KEY, note);
         intent.putExtras(bundle);
         return intent;
-
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        String titleEdit = editTitle.getText().toString().trim();
+        final String titleEdit = editTitle.getText().toString().trim();
         String textEdit = editText.getText().toString().trim();
         if (!titleEdit.isEmpty() || !textEdit.isEmpty()) {
             if (action == 'a') {

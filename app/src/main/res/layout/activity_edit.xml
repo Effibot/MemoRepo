@@ -43,16 +43,11 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="bottom"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="3"
-                        android:inputType="textMultiLine"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="27dp"
-                        android:textColorHint="@color/titleColor">
+                        style="@style/materialTextInput">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/editTitle"
+                            style="@style/materialTextInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"

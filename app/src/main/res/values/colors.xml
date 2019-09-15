@@ -6,4 +6,5 @@
     <color name="mainColor">#eceff1</color>
     <color name="titleColor">#FFFFFFFF</color>
     <color name="cardBgStdColor">#ffffff</color>
+    <color name="hintColor">#4f5b62</color>
 </resources>

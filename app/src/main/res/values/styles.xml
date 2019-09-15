@@ -25,13 +25,27 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColor">@color/titleColor</item>
-
     </style>
 
     <style name="cardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/cardBgStdColor</item>
         <item name="cardCornerRadius">10dp</item>
         <item name="cardElevation">6dp</item>
+    </style>
+    <style name="materialTextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:layout_weight">3</item>
+        <item name="android:paddingStart">15dp</item>
+        <item name="android:paddingEnd">27dp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:maxRows">2</item>
+        <item name="boxStrokeColor">@color/hintColor</item>
+        <item name="android:textColorHint">@color/titleColor</item>
+        <item name="hintTextColor">@color/hintColor</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:importantForAutofill">no</item>
     </style>
 
     <style name="materialButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
