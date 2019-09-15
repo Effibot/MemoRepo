@@ -1,7 +1,6 @@
 package com.effirossimotoi.memome.alfa;
 
 import android.content.Context;
-import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,8 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.effirossimotoi.memome.alfa.Database.AppDatabase;
-import com.effirossimotoi.memome.alfa.Note;
-import com.effirossimotoi.memome.alfa.RecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -33,7 +30,6 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static List<String> lista;
     private static AppDatabase db;
     private static List<Note> notes;
     private static RecyclerView recyclerView;
