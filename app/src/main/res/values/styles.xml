@@ -40,6 +40,7 @@
         <item name="android:inputType">textMultiLine</item>
         <item name="android:maxLines">2</item>
         <item name="android:maxRows">2</item>
+        <item name="android:maxLength">32</item>
         <item name="boxStrokeColor">@color/hintColor</item>
         <item name="android:textColorHint">@color/titleColor</item>
         <item name="hintTextColor">@color/hintColor</item>
