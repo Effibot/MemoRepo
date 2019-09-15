@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -23,6 +24,7 @@ import com.effirossimotoi.memome.alfa.Database.AppDatabase;
 import com.effirossimotoi.memome.alfa.Note;
 import com.effirossimotoi.memome.alfa.RecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
 import java.util.Collections;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private static RecyclerViewAdapter adapter;
     private static Context baseContext;
     public static View viewLayout;
+
+    private static ItemTouchHelper itemTouchHelper;
+    private static Note mRecentlyDeletedItem;
 
     //TODO DEBUG
     private FloatingActionButton deleteAllFab;
@@ -72,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
+        // Swipe to delete
+        itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback());
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.adapterNotifyAll();
             }
         });
-
     }
 
     public static void adapterNotifyAll() {
@@ -100,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new RecyclerViewAdapter(notes, baseContext);
         recyclerView.setAdapter(adapter);
+
+        itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback());
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         adapter.notifyDataSetChanged();
     }
 
@@ -211,5 +223,28 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         adapter.notifyDataSetChanged();
+    }
+    public static void deleteItem(int position) {
+        mRecentlyDeletedItem = notes.get(position);
+        db.noteDAO().deleteNote(mRecentlyDeletedItem);
+        adapterNotifyAll();
+        showUndoSnackbar();
+    }
+
+    private static void showUndoSnackbar(){
+        Snackbar snackbar = Snackbar.make(viewLayout, R.string.snack_bar_text,
+                Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.snack_bar_undo, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                undoDelete();
+            }
+        });
+        snackbar.show();
+    }
+
+    private static void undoDelete() {
+        db.noteDAO().insertAll(mRecentlyDeletedItem);
+        adapterNotifyAll();
     }
 }

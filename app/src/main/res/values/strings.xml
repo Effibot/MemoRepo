@@ -20,4 +20,6 @@
     <string name="add_note_error">Write Title or Text at least!</string>
     <string name="positive_delete">Of Course!</string>
     <string name="negative_delete">maybe..</string>
+    <string name="snack_bar_text">Note deleted!</string>
+    <string name="snack_bar_undo">UNDO</string>
 </resources>
