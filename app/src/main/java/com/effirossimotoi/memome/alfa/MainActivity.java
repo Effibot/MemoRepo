@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
      * i=3 : by modified date ascending
      * i=4 : by creation date descending
      * i=5 : by creation date ascending
-     *
      * @param i
      */
     private static void sortNotes(int i) {
