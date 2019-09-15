@@ -3,6 +3,7 @@ package com.effirossimotoi.memome.alfa;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -22,11 +23,17 @@ public class Note implements Parcelable {
     private String creation_date;    // inizializzata in automatico da data del telefono
     @ColumnInfo(name = "modified_column")
     private String modifed_date;
+    @ColumnInfo(name = "color_column")
+    private int colorId;
+    @ColumnInfo(name = "icon_column")
+    private int iconId;
 
-    public Note(String title, String note) {
+    public Note(String title, String note, @Nullable int colorId, int iconId) {
         int id;
         this.title = title;
         this.note = note;
+        this.colorId = colorId;
+        this.iconId = iconId;
         creation_date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
         modifed_date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
         // modo per mostrare la data in una stringa
@@ -39,6 +46,8 @@ public class Note implements Parcelable {
         this.note = parcel.readString();
         this.creation_date = parcel.readString();
         this.modifed_date = parcel.readString();
+        this.colorId = parcel.readInt();
+        this.iconId = parcel.readInt();
     }
     public int getId() {
         return id;
@@ -79,6 +88,22 @@ public class Note implements Parcelable {
         this.modifed_date = modifed_date;
     }
 
+    public int getColorId() {
+        return colorId;
+    }
+
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
+    }
+
+    public int getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(int iconId) {
+        this.iconId = iconId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -91,6 +116,8 @@ public class Note implements Parcelable {
         dest.writeString(note);
         dest.writeString(creation_date);
         dest.writeString(modifed_date);
+        dest.writeInt(colorId);
+        dest.writeInt(iconId);
     }
     public final static Creator CREATOR = new Creator() {
         @Override

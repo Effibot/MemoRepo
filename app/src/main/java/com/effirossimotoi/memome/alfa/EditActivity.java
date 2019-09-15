@@ -3,22 +3,29 @@ package com.effirossimotoi.memome.alfa;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.room.Room;
-
 import com.effirossimotoi.memome.alfa.Database.AppDatabase;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+
+import petrov.kristiyan.colorpicker.ColorPicker;
+
 
 public class EditActivity extends AppCompatActivity {
     private static final String TAG = EditActivity.class.getName();
@@ -30,23 +37,31 @@ public class EditActivity extends AppCompatActivity {
     private EditText editTitle, editText;
     private AppDatabase db;
     private Note note = null;
-    private MaterialButton deleteButton;
+    private MaterialButton deleteButton, iconButton, colorButton;
+    private CardView editTextCard;
+    private IdConversion idConversion;
+    private int idColor, idIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         appBarLayout = findViewById(R.id.app_bar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         deleteButton = findViewById(R.id.deleteButton);
+        colorButton = findViewById(R.id.colorButton);
+        iconButton = findViewById(R.id.iconButton);
+        editTextCard = findViewById(R.id.editTextCard);
 
         collapsingToolbarLayout = findViewById(R.id.toolbar_layout);
         editTitle = findViewById(R.id.editTitle);
         editText = findViewById(R.id.textNote);
         collapsingToolbarLayout.setTitle(" "); // spazio obbligatorio per annullare scritta nella toolbar
+
+        idConversion = new IdConversion(this);
 
         db = Room.databaseBuilder(this, AppDatabase.class, "note_database")
                 .allowMainThreadQueries()
@@ -63,12 +78,21 @@ public class EditActivity extends AppCompatActivity {
         if (action == 'e') {
             editText.setText(note.getNote());
             editTitle.setText(note.getTitle());
+            idColor = note.getColorId();
+            editTextCard.setCardBackgroundColor(idColor);
+            idIcon = note.getIconId();
+            iconButton.setIcon(idConversion.getIconFromId(idIcon));
+        } else {
+            idIcon = 8;
+            idColor = Color.WHITE;
+            deleteButton.setEnabled(false);
         }
         //TODO HARDCODED STRINGS
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAlert("Conferma Cancellazione", "Vuoi davvero cancellare la tua nota?");
+                showAlert(getResources().getString(R.string.alert_title),
+                        getResources().getString(R.string.alert_text));
             }
         });
 
@@ -94,6 +118,30 @@ public class EditActivity extends AppCompatActivity {
                 collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.AppTheme_PopupOverlay);
             }
         });
+
+        colorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                opencolorpicker();
+            }
+        });
+
+        iconButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new IconFragment();
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack(null).add(R.id.fragmentAnchor, fragment).commit();
+                }
+            }
+        });
+    }
+
+    public void setIdIcon(int idIcon) {
+        this.idIcon = idIcon;
+        iconButton.setIcon(idConversion.getIconFromId(idIcon));
     }
 
     // get intent base
@@ -115,28 +163,28 @@ public class EditActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        final String titleEdit = editTitle.getText().toString().trim();
-        String textEdit = editText.getText().toString().trim();
-        if (!titleEdit.isEmpty() || !textEdit.isEmpty()) {
-            if (action == 'a') {
-                // aggiungi al database
-                db.noteDAO().insertAll(new Note(titleEdit, textEdit));
-            } else if (action == 'e') {
-                // modifica database
-                // elimino per poi reinserire la nota
-                String date = note.getCreation_date();
-                db.noteDAO().deleteNote(note);
-                Note newNote = new Note(titleEdit, textEdit);
-                newNote.setCreation_date(date);
-                db.noteDAO().insertAll(newNote);
+            final String titleEdit = editTitle.getText().toString().trim();
+            String textEdit = editText.getText().toString().trim();
+            if (!titleEdit.isEmpty() || !textEdit.isEmpty()) {
+                if (action == 'a') {
+                    // aggiungi al database
+                    db.noteDAO().insertAll(new Note(titleEdit, textEdit, idColor, idIcon));
+                } else if (action == 'e') {
+                    // modifica database
+                    // elimino per poi reinserire la nota
+                    String date = note.getCreation_date();
+                    db.noteDAO().deleteNote(note);
+                    Note newNote = new Note(titleEdit, textEdit, idColor, idIcon);
+                    newNote.setCreation_date(date);
+                    db.noteDAO().insertAll(newNote);
+                }
+                MainActivity.adapterNotifyAll();
+                finish();
+            } else {
+                Snackbar.make(MainActivity.viewLayout, getResources()
+                        .getString(R.string.add_note_error), Snackbar.LENGTH_SHORT).show();
             }
-            MainActivity.adapterNotifyAll();
-            finish();
-        } else {
-            Snackbar.make(MainActivity.viewLayout, getResources()
-                    .getString(R.string.add_note_error), Snackbar.LENGTH_SHORT).show();
-        }
+        super.onBackPressed();
     }
 
     private void showAlert(String title, String message) {
@@ -182,4 +230,26 @@ public class EditActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void opencolorpicker() {
+        final ColorPicker colorPicker = new ColorPicker(this);
+        ArrayList<String> colors = new ArrayList<>();
+        colors.add(getResources().getString(R.string.white));colors.add(getResources().getString(R.string.red));
+        colors.add(getResources().getString(R.string.pink));colors.add(getResources().getString(R.string.purple));
+        colors.add(getResources().getString(R.string.blue));colors.add(getResources().getString(R.string.cyan));
+        colors.add(getResources().getString(R.string.lime));colors.add(getResources().getString(R.string.green));
+        colors.add(getResources().getString(R.string.yellow));colors.add(getResources().getString(R.string.orange));
+        colorPicker.setColors(colors)
+                .setColumns(5)
+                .setRoundColorButton(true)
+                .setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position, int color) {
+                        editTextCard.setCardBackgroundColor(color);
+                        idColor = color;
+                    }
+                    @Override
+                    public void onCancel() {
+                    }
+                }).show();
+    }
 }

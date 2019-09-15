@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase;
 import com.effirossimotoi.memome.alfa.Note;
 
 
-@Database(entities = {Note.class}, version = 2, exportSchema = false)
+@Database(entities = {Note.class}, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract NoteDAO noteDAO();
 }

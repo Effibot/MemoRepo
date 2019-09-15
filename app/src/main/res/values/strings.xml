@@ -2,22 +2,45 @@
     <string name="app_name">MemoMe</string>
     <string name="hintText">Insert Text</string>
     <string name="action_sort">Sort</string>
-    <string name="title_activity_edit">EditActivity</string>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_edit" translatable="false">EditActivity</string>
+    <string name="title_activity_details" translatable="false">DetailsActivity</string>
     <string name="action_search">Search</string>
     <string name="sort_option0">Alphabetically</string>
     <string name="sort_option1">Modified</string>
     <string name="sort_option2">Created</string>
+    <string name="sort_option3">Color</string>
     <string name="hintTitle">Insert Title</string>
-    <string name="icon">icon</string>
-    <string name="delete">delete</string>
-    <string name="color">color</string>
-    <string name="save">save</string>
-    <string name="date">day/month/year hour:minutes</string>
+    <string name="icon" translatable="false">icon</string>
+    <string name="delete" translatable="false">delete</string>
+    <string name="color" translatable="false">color</string>
+    <string name="save" translatable="false">save</string>
+    <string name="date" translatable="false">day/month/year hour:minutes</string>
     <string name="add_note_error">Write Title or Text at least!</string>
     <string name="positive_delete">Of Course!</string>
-    <string name="negative_delete">maybe..</string>
+    <string name="negative_delete">No</string>
     <string name="snack_bar_text">Note deleted!</string>
     <string name="snack_bar_undo">UNDO</string>
     <string name="descending">Descending</string>
+    <string name="dev1" translatable="false">Andrea Efficace</string>
+    <string name="dev2" translatable="false">Lorenzo Rossi</string>
+    <string name="dev3" translatable="false">Ionut Marian Motoi</string>
+    <string name="navigation_open" translatable="false">Navigation Open</string>
+    <string name="navigation_close" translatable="false">Navigation Close</string>
+
+
+    <string name="white" translatable="false">#ffffff</string>
+    <string name="red" translatable="false">#f44366</string>
+    <string name="pink" translatable="false">#ff6090</string>
+    <string name="purple" translatable="false">#d05ce3</string>
+    <string name="blue" translatable="false">#757de8</string>
+    <string name="cyan" translatable="false">#26c6da</string>
+    <string name="lime" translatable="false">#52c7b8</string>
+    <string name="green" translatable="false">#9ccc65</string>
+    <string name="yellow" translatable="false">#fff263</string>
+    <string name="orange" translatable="false">#ffa726</string>
+    <string name="alert_title">Confirm Delete</string>
+    <string name="alert_text">Do you really want to delete this note?</string>
+    <string name="slogan_app" translatable="false">A simple app for Notes!</string>
+    <string name="developers">Developed By</string>
+
 </resources>

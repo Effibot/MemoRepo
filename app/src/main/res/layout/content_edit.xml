@@ -12,11 +12,11 @@
     android:fitsSystemWindows="true">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/editTextCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         style="@style/cardStyle"
         android:elevation="16dp"
-        android:fitsSystemWindows="true"
         android:padding="4dp"
         android:layout_margin="10dp">
         <RelativeLayout
@@ -30,6 +30,7 @@
                 android:id="@+id/textNote"
                 android:textSize="18sp"
                 android:hint="@string/hintText"
+                android:textColorHint="@color/hintColor"
                 android:inputType="textMultiLine"
                 android:background="@android:color/transparent"
                 android:importantForAutofill="no"

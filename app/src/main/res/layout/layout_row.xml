@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,8 +12,9 @@
         android:id="@+id/cardId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/cardStyle"
-        android:elevation="4dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/white"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
@@ -31,15 +33,15 @@
                 tools:text="title"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:layout_toStartOf="@id/showText"/>
+                android:layout_toStartOf="@id/iconView"/>
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/showText"
+            <ImageView
+                android:id="@+id/iconView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_leftarrow" />
+                android:src="@drawable/ic_icon" />
 
             <TextView
                 android:id="@+id/date"

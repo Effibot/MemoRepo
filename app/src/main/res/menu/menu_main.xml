@@ -20,6 +20,9 @@
                 <item
                     android:id="@+id/sortCre"
                     android:title="@string/sort_option2" />
+                <item
+                    android:id="@+id/sortColor"
+                    android:title="@string/sort_option3" />
             </group>
             <item
                 android:id="@+id/descending"

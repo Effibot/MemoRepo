@@ -21,6 +21,7 @@ import androidx.room.Room;
 
 import com.effirossimotoi.memome.alfa.Database.AppDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
@@ -29,23 +30,20 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private static AppDatabase db;
     private static List<Note> notes;
     private static RecyclerView recyclerView;
     private static RecyclerViewAdapter adapter;
     private static Context baseContext;
     public static View viewLayout;
-
+    public static NavigationView navigationView;
     private static ItemTouchHelper itemTouchHelper;
     private static Note mRecentlyDeletedItem;
 
     private static int lastSort;
     private MenuItem checkBox;
 
-    //TODO DEBUG
-    private FloatingActionButton deleteAllFab;
-    /////////////////////////////////////////
 
     public static void adapterNotifyAll() {
         notes = db.noteDAO().getAll();
@@ -71,8 +69,11 @@ public class MainActivity extends AppCompatActivity {
      * i=3 : by modified date ascending
      * i=4 : by creation date descending
      * i=5 : by creation date ascending
+     * i=6 : by color descending
+     * i=7 : by color ascending
      * @param i
      */
+
     private static void sortNotes(int i) {
         switch (i){
             case 0:
@@ -171,10 +172,32 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 break;
+            case 6:
+                Collections.sort(notes, new Comparator<Note>() {
+                    @Override
+                    public int compare(Note n1, Note n2) {
+                        if (n1.getColorId()<n2.getColorId())
+                            return 1;
+                        else if (n1.getColorId()>n2.getColorId())
+                            return -1;
+                        else return 0;
+                    }
+                });
+                break;
+            case 7:
+                Collections.sort(notes, new Comparator<Note>() {
+                    @Override
+                    public int compare(Note n1, Note n2) {
+                        if (n1.getColorId()<n2.getColorId())
+                            return -1;
+                        else if (n1.getColorId()>n2.getColorId())
+                            return 1;
+                        else return 0;                    }
+                });
+                break;
         }
         adapter.notifyDataSetChanged();
     }
-
 
     public static void sendObject(Context context, int pos) {
         context.startActivity(EditActivity.getEditIntent(context, 'e', notes.get(pos)));
@@ -185,14 +208,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         viewLayout = findViewById(R.id.view_layout);
-        baseContext = MainActivity.this;    // baro perché mi servirà statico per aggiornare adapter
+        baseContext = MainActivity.this;
 
-        // controllo che entro per la prima votla nella onCreate
+        // controllo che entro per la prima volta nella onCreate
         if (savedInstanceState == null) {
             db = Room.databaseBuilder(MainActivity.this, AppDatabase.class, "note_database")
                     .allowMainThreadQueries()
@@ -219,15 +242,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // uso tag 'a' per add
                 startActivity(EditActivity.getEditIntent(MainActivity.this, 'a'));
-            }
-        });
-
-        deleteAllFab = findViewById(R.id.deleteAllFab);
-        deleteAllFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                db.noteDAO().deleteAll();
-                MainActivity.adapterNotifyAll();
             }
         });
     }
@@ -284,13 +298,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.sortCre:
                 item.setChecked(true);
-                lastSort = 2;
                 if (checkBox.isChecked()) {
                     lastSort = 4;
                     sortNotes(4);
                 } else {
                     lastSort = 5;
                     sortNotes(5);
+                }
+                break;
+            case R.id.sortColor:
+                item.setChecked(true);
+                if (checkBox.isChecked()) {
+                    lastSort = 6;
+                    sortNotes(6);
+                } else {
+                    lastSort = 7;
+                    sortNotes(7);
                 }
                 break;
             case R.id.descending:

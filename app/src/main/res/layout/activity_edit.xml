@@ -76,7 +76,9 @@
                         android:text="@string/icon"
                         app:icon="@drawable/ic_icon"
                         app:iconGravity="start"
-                        app:strokeWidth="1dp" />
+                        app:strokeWidth="1dp">
+
+                    </com.google.android.material.button.MaterialButton>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/colorButton"
@@ -99,7 +101,11 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
     <include layout="@layout/content_edit" />
-
+    <FrameLayout
+        android:id="@+id/fragmentAnchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchorGravity="center"
+        app:layout_anchor="@id/iconButton"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

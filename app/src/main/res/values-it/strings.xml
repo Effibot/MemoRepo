@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MemoMe</string>
+    <string name="action_search">Cerca</string>
+    <string name="action_sort">Ordina</string>
+    <string name="add_note_error">Scrivi un Titolo o il testo della nota!</string>
+    <string name="alert_text">Vuoi davvero cancellare la nota?</string>
+    <string name="alert_title">Conferma Cancellazione</string>
+    <string name="descending">Discendente</string>
+    <string name="hintText">Inserisci Testo</string>
+    <string name="hintTitle">Inserisci Titolo</string>
+    <string name="positive_delete">Certo!</string>
+    <string name="snack_bar_text">Nota cancellata!</string>
+    <string name="snack_bar_undo">ANNULLA</string>
+    <string name="sort_option3">Colore</string>
+    <string name="sort_option0">Alfabetico</string>
+    <string name="sort_option1">Modificato</string>
+    <string name="sort_option2">Creazione</string>
+    <string name="negative_delete">No</string>
+    <string name="developers">Sviluppato Da</string>
+</resources>

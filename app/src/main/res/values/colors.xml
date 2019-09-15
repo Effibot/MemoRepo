@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#52c7b8</color>
+    <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#009688</color>
     <color name="colorAccent">#FF5722</color>
     <color name="mainColor">#eceff1</color>
     <color name="titleColor">#FFFFFFFF</color>
     <color name="cardBgStdColor">#ffffff</color>
     <color name="hintColor">#4f5b62</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#f44366</color>
+    <color name="pink">#ff6090</color>
+    <color name="purple">#d05ce3</color>
+    <color name="blue">#757de8</color>
+    <color name="cyan">#26c6da</color>
+    <color name="lime">#52c7b8</color>
+    <color name="green">#9ccc65</color>
+    <color name="yellow">#fff263</color>
+    <color name="orange">#ffa726</color>
 </resources>

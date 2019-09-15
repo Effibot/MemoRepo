@@ -1,15 +1,18 @@
 package com.effirossimotoi.memome.alfa;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<Note> notes;
     private List<Note> notesFull;
     private Context context;
+    private IdConversion idConversion;
 
     public RecyclerViewAdapter(List<Note> notes, Context context) {
         this.notes = notes;
@@ -36,10 +40,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        idConversion = new IdConversion(context);
         Note note = notes.get(position);
         holder.title.setText(note.getTitle());
         holder.text.setText(note.getNote());
         holder.date.setText(note.getModifed_date());
+        holder.imageView.setImageDrawable(idConversion.getIconFromId(note.getIconId()));
+        holder.cardView.setCardBackgroundColor(note.getColorId());
         holder.touch_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +101,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private TextView title;
         private TextView text;
         private TextView date;
+        private ImageView imageView;
+        private CardView cardView;
         private RelativeLayout touch_layout;
 
         private MyViewHolder(@NonNull View itemView) {
@@ -102,6 +111,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             title = itemView.findViewById(R.id.title);
             text = itemView.findViewById(R.id.text);
             date = itemView.findViewById(R.id.date);
+            imageView = itemView.findViewById(R.id.iconView);
+            cardView = itemView.findViewById(R.id.cardId);
             touch_layout = itemView.findViewById(R.id.touch_layout);
         }
     }
