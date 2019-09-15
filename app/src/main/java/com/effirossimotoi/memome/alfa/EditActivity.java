@@ -31,6 +31,7 @@ public class EditActivity extends AppCompatActivity {
     private AppDatabase db;
     private Note note = null;
     private MaterialButton deleteButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,7 @@ public class EditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        deleteButton=findViewById(R.id.deleteButton);
+        deleteButton = findViewById(R.id.deleteButton);
 
         collapsingToolbarLayout = findViewById(R.id.toolbar_layout);
         editTitle = findViewById(R.id.editTitle);
@@ -67,22 +68,30 @@ public class EditActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAlert("Conferma Cancellazione","Vuoi davvero cancellare la tua nota?");
+                showAlert("Conferma Cancellazione", "Vuoi davvero cancellare la tua nota?");
             }
         });
 
         appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                if (state == State.COLLAPSED && !(note == null)) {
-                    collapsingToolbarLayout.setTitle(note.getTitle());
-                    collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.AppTheme_PopupOverlay);
-                } else if (state == State.COLLAPSED)
-                    collapsingToolbarLayout.setTitle(editTitle.getText()); // spazio obbligatorio per annullare scritta nella toolbar
-                else {
-                    collapsingToolbarLayout.setTitle(" ");
-                    collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.AppTheme_PopupOverlay);
+                int set = 0;
+                if (state == State.COLLAPSED && !(note == null)) set = 1;
+                else if (state == State.COLLAPSED) set = 2;
+                switch (set) {
+                    case 1:
+                        if (note.getTitle().length() < editTitle.getText().length())
+                            collapsingToolbarLayout.setTitle(editTitle.getText());
+                        else collapsingToolbarLayout.setTitle(note.getTitle());
+                        break;
+                    case 2:
+                        collapsingToolbarLayout.setTitle(editTitle.getText());
+                        break;
+                    default:
+                        collapsingToolbarLayout.setTitle(" ");
+                        break;
                 }
+                collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.AppTheme_PopupOverlay);
             }
         });
     }
@@ -116,7 +125,6 @@ public class EditActivity extends AppCompatActivity {
             } else if (action == 'e') {
                 // modifica database
                 // elimino per poi reinserire la nota
-
                 db.noteDAO().deleteNote(note);
                 db.noteDAO().insertAll(new Note(titleEdit, textEdit));
             }
@@ -127,7 +135,8 @@ public class EditActivity extends AppCompatActivity {
                     .getString(R.string.add_note_error), Snackbar.LENGTH_SHORT).show();
         }
     }
-    private void showAlert(String title, String message){
+
+    private void showAlert(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
 
         builder.setTitle(title);
@@ -153,6 +162,7 @@ public class EditActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_edit, menu);

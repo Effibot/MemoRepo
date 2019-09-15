@@ -46,7 +46,6 @@
         <item name="hintTextColor">@color/hintColor</item>
         <item name="android:backgroundTint">@android:color/transparent</item>
         <item name="android:textSize">25sp</item>
-        <item name="android:importantForAutofill">no</item>
     </style>
 
     <style name="materialButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
