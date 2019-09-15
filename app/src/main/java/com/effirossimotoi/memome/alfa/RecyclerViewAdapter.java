@@ -39,7 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Note note = notes.get(position);
         holder.title.setText(note.getTitle());
         holder.text.setText(note.getNote());
-        holder.date.setText(note.getDate());
+        holder.date.setText(note.getModifed_date());
         holder.touch_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

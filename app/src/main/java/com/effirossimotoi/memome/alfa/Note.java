@@ -18,14 +18,17 @@ public class Note implements Parcelable {
     private String title;
     @ColumnInfo(name = "note_column")
     private String note;
-    @ColumnInfo(name = "date_column")
-    private String date;    // inizializzata in automatico da data del telefono
+    @ColumnInfo(name = "creation_column")
+    private String creation_date;    // inizializzata in automatico da data del telefono
+    @ColumnInfo(name = "modified_column")
+    private String modifed_date;
 
     public Note(String title, String note) {
         int id;
         this.title = title;
         this.note = note;
-        date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+        creation_date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
+        modifed_date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(Calendar.getInstance().getTime());
         // modo per mostrare la data in una stringa
         /*tramite il pattern scegliamo il modo in cui rappresentiamo la data
         * Format è statico di Calendar e permette di ottenere data e ora dal sistema*/
@@ -34,7 +37,8 @@ public class Note implements Parcelable {
         this.id = parcel.readInt();
         this.title = parcel.readString();
         this.note = parcel.readString();
-        this.date = parcel.readString();
+        this.creation_date = parcel.readString();
+        this.modifed_date = parcel.readString();
     }
     public int getId() {
         return id;
@@ -59,14 +63,21 @@ public class Note implements Parcelable {
         this.note = note;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreation_date() {
+        return creation_date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreation_date(String creation_date) {
+        this.creation_date = creation_date;
     }
 
+    public String getModifed_date() {
+        return modifed_date;
+    }
+
+    public void setModifed_date(String modifed_date) {
+        this.modifed_date = modifed_date;
+    }
 
     @Override
     public int describeContents() {
@@ -78,7 +89,8 @@ public class Note implements Parcelable {
         dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(note);
-        dest.writeString(date);
+        dest.writeString(creation_date);
+        dest.writeString(modifed_date);
     }
     public final static Creator CREATOR = new Creator() {
         @Override

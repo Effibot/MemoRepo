@@ -125,8 +125,11 @@ public class EditActivity extends AppCompatActivity {
             } else if (action == 'e') {
                 // modifica database
                 // elimino per poi reinserire la nota
+                String date = note.getCreation_date();
                 db.noteDAO().deleteNote(note);
-                db.noteDAO().insertAll(new Note(titleEdit, textEdit));
+                Note newNote = new Note(titleEdit, textEdit);
+                newNote.setCreation_date(date);
+                db.noteDAO().insertAll(newNote);
             }
             MainActivity.adapterNotifyAll();
             finish();

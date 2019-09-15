@@ -4,30 +4,28 @@
     tools:context="com.prova.noteapp.MainActivity">
     <item
         android:id="@+id/action_sort"
+        android:icon="@drawable/ic_sort"
         android:orderInCategory="100"
         android:title="@string/action_sort"
-        android:icon="@drawable/ic_sort"
         app:showAsAction="ifRoom">
         <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/sortAz"
+                    android:title="@string/sort_option0" />
+                <item
+                    android:id="@+id/sortMod"
+                    android:checked="true"
+                    android:title="@string/sort_option1" />
+                <item
+                    android:id="@+id/sortCre"
+                    android:title="@string/sort_option2" />
+            </group>
             <item
-                android:id="@+id/sortAz"
-                android:title="@string/sort_option0"/>
-            <item
-                android:id="@+id/sortZa"
-                android:title="@string/sort_option1"/>
-            <item
-                android:id="@+id/sortMod"
-                android:title="@string/sort_option2"/>
-            <item
-                android:id="@+id/sortModInv"
-                android:title="@string/sort_option3"/>
-            <item
-                android:id="@+id/sortCre"
-                android:title="@string/sort_option4"/>
-            <item
-                android:id="@+id/sortCreInv"
-                android:title="@string/sort_option5"/>
-
+                android:id="@+id/descending"
+                android:checkable="true"
+                android:checked="true"
+                android:title="@string/descending" />
         </menu>
     </item>
     <item

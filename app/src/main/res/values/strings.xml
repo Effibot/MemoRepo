@@ -5,12 +5,9 @@
     <string name="title_activity_edit">EditActivity</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="action_search">Search</string>
-    <string name="sort_option0">A-Z</string>
-    <string name="sort_option1">Z-A</string>
-    <string name="sort_option2">Newest</string>
-    <string name="sort_option3">Oldest</string>
-    <string name="sort_option4">Created</string>
-    <string name="sort_option5">Created</string>
+    <string name="sort_option0">Alphabetically</string>
+    <string name="sort_option1">Modified</string>
+    <string name="sort_option2">Created</string>
     <string name="hintTitle">Insert Title</string>
     <string name="icon">icon</string>
     <string name="delete">delete</string>
@@ -22,4 +19,5 @@
     <string name="negative_delete">maybe..</string>
     <string name="snack_bar_text">Note deleted!</string>
     <string name="snack_bar_undo">UNDO</string>
+    <string name="descending">Descending</string>
 </resources>
