@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
 
 import com.effirossimotoi.memome.alfa.Database.AppDatabase;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +26,7 @@ public class EditActivity extends AppCompatActivity {
     private static final String NOTE_KEY = TAG + ".note.key";
     private char action;
     private CollapsingToolbarLayout collapsingToolbarLayout;
+    private AppBarLayout appBarLayout;
     private EditText editTitle, editText;
     private AppDatabase db;
     private Note note = null;
@@ -33,6 +35,7 @@ public class EditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        appBarLayout = findViewById(R.id.app_bar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,15 +58,26 @@ public class EditActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         note = (Note) bundle.getParcelable(NOTE_KEY);
 
+
         if (action == 'e') {
             editText.setText(note.getNote());
             editTitle.setText(note.getTitle());
         }
-
+        //TODO HARDCODED STRINGS
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAlert("Conferma Cancellazione","Vuoi davvero cancellare la tua nota?");
+            }
+        });
+        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if (state == State.COLLAPSED) {
+                    collapsingToolbarLayout.setTitle(note.getTitle());
+                    collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.AppTheme_PopupOverlay);
+                } else
+                    collapsingToolbarLayout.setTitle(" "); // spazio obbligatorio per annullare scritta nella toolbar
             }
         });
     }
@@ -88,6 +102,7 @@ public class EditActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         String titleEdit = editTitle.getText().toString().trim();
         String textEdit = editText.getText().toString().trim();
         if (!titleEdit.isEmpty() || !textEdit.isEmpty()) {
@@ -102,12 +117,10 @@ public class EditActivity extends AppCompatActivity {
                 db.noteDAO().insertAll(new Note(titleEdit, textEdit));
             }
             MainActivity.adapterNotifyAll();
-
             finish();
         } else {
-            Snackbar.make(MainActivity.viewLayout, "inserisci almeno un dato", Snackbar.LENGTH_SHORT).show();
-
-            super.onBackPressed();
+            Snackbar.make(MainActivity.viewLayout, getResources()
+                    .getString(R.string.add_note_error), Snackbar.LENGTH_SHORT).show();
         }
     }
     private void showAlert(String title, String message){
@@ -116,7 +129,8 @@ public class EditActivity extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setCancelable(true);
-        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getResources().
+                getString(R.string.positive_delete), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 db.noteDAO().deleteNote(note);
@@ -125,7 +139,8 @@ public class EditActivity extends AppCompatActivity {
 
             }
         });
-        builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getResources().
+                getString(R.string.negative_delete), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -143,11 +158,11 @@ public class EditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
-            case android.R.id.home:
-                finish();
-                break;
+        if (id == android.R.id.home) {
+            onBackPressed();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

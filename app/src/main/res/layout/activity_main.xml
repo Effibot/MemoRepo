@@ -5,20 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/view_layout">
-
+    android:id="@+id/view_layout"
+    android:background="@color/mainColor">
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="7dp"
+        android:background="@android:color/transparent"
+        android:elevation="0dp">
         <androidx.appcompat.widget.Toolbar
+            android:background="@drawable/bg_actionbar"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+            android:elevation="4dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,7 +43,6 @@
         app:srcCompat="@drawable/ic_deleteall" />
 
     <include layout="@layout/content_main" />
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

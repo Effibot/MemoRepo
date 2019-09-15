@@ -14,6 +14,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
     <style name="AppTheme.Material" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -22,9 +23,35 @@
         <item name="android:textColorHint">@color/titleColor</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">@color/titleColor</item>
+
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="cardStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/cardBgStdColor</item>
+        <item name="cardCornerRadius">10dp</item>
+        <item name="cardElevation">6dp</item>
+    </style>
 
+    <style name="materialButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="backgroundTint">@color/colorPrimaryDark</item>
+        <item name="elevation">6dp</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textAppearance">@style/ButtonTextAppearance</item>
+        <item name="android:textColor">@color/titleColor</item>
+        <item name="android:textSize">10sp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconTint">#FFFFFFFF</item>
+        <item name="android:strokeColor">@color/titleColor</item>
+        <item name="android:layout_marginBottom">4dp</item>
+    </style>
+
+    <style name="ButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>

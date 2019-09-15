@@ -8,17 +8,17 @@
     tools:context=".EditActivity"
     tools:showIn="@layout/activity_edit"
     android:fillViewport="true"
-    android:background="#eeeeee"
+    android:background="@color/mainColor"
     android:fitsSystemWindows="true">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="16dp"
+        style="@style/cardStyle"
         android:elevation="16dp"
         android:fitsSystemWindows="true"
         android:padding="4dp"
-        android:layout_margin="15dp">
+        android:layout_margin="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

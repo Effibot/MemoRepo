@@ -5,116 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/mainColor"
     tools:context=".EditActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
         android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
+        android:elevation="0dp">
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_height="@dimen/app_bar_height"
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:background="@drawable/bg_editactionbar"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:elevation="4dp"
+            app:contentScrim="@color/colorPrimaryDark"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:toolbarId="@+id/toolbar">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:layout_marginTop="30dp"
-                android:textColorHint="@color/titleColor">
-                <EditText
-                    android:maxLength="32"
-                    android:hint="@string/hintTitle"
-                    android:id="@+id/editTitle"
+
+            <TableLayout
+                android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimaryDark"
-                    android:importantForAutofill="no"
-                    android:inputType="textImeMultiLine"
-                    android:textColor="@color/titleColor"
-                    android:textSize="30sp"
-                    android:layout_marginBottom="4dp"
-                    android:textColorHint="@color/titleColor"
-                    />
-                <LinearLayout
+                android:weightSum="3">
+
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="3"
-                    android:layout_marginBottom="4dp">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="3"
+                        android:inputType="textMultiLine"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="27dp"
+                        android:textColorHint="@color/titleColor">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:hint="@string/hintTitle"
+                            android:importantForAutofill="no"
+                            android:inputType="textMultiLine"
+                            android:maxLength="32"
+                            android:textColor="@color/titleColor"
+                            android:textSize="25sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
 
                     <com.google.android.material.button.MaterialButton
-                        android:layout_weight="1"
                         android:id="@+id/deleteButton"
-                        style="@style/Widget.MaterialComponents.Button.Icon"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:elevation="6dp"
+                        style="@style/materialButton"
                         android:text="@string/delete"
-                        android:textAlignment="textStart"
-                        android:textAppearance="@style/Widget.MaterialComponents.Button.Icon"
-                        android:textColor="@color/titleColor"
-                        android:textSize="18sp"
                         app:icon="@drawable/ic_delete"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:strokeWidth="1dp"
-                        android:layout_marginEnd="4dp"/>
-
+                        app:iconGravity="start"
+                        app:strokeWidth="1dp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:layout_weight="1"
                         android:id="@+id/iconButton"
-                        style="@style/Widget.MaterialComponents.Button.Icon"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:elevation="6dp"
+                        style="@style/materialButton"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:text="@string/icon"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/Widget.MaterialComponents.Button.Icon"
-                        android:textColor="@color/titleColor"
-                        android:textSize="18sp"
                         app:icon="@drawable/ic_icon"
-                        app:iconGravity="textStart"
-                        app:strokeWidth="1dp"
-                        />
-
+                        app:iconGravity="start"
+                        app:strokeWidth="1dp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:layout_weight="1"
                         android:id="@+id/colorButton"
-                        style="@style/Widget.MaterialComponents.Button.Icon"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorPrimaryDark"
-                        android:elevation="6dp"
+                        style="@style/materialButton"
                         android:text="@string/color"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/Widget.MaterialComponents.Button.Icon"
-                        android:textColor="@color/titleColor"
-                        android:textSize="18sp"
                         app:icon="@drawable/ic_brush"
-                        app:iconGravity="textStart"
-                        app:strokeWidth="1dp"
-                        android:layout_marginStart="4dp"/>
-                </LinearLayout>
-            </com.google.android.material.textfield.TextInputLayout>
+                        app:iconGravity="start"
+                        app:strokeWidth="1dp" />
+                </TableRow>
+            </TableLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
+                style="@style/AppTheme.PopupOverlay"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_width="wrap_content"
+                android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:titleTextColor="@color/titleColor" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

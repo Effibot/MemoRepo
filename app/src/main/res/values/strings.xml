@@ -17,4 +17,7 @@
     <string name="color">color</string>
     <string name="save">save</string>
     <string name="date">day/month/year hour:minutes</string>
+    <string name="add_note_error">Write Title or Text at least!</string>
+    <string name="positive_delete">Of Course!</string>
+    <string name="negative_delete">maybe..</string>
 </resources>
