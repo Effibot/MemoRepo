@@ -19,6 +19,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:titleTextColor">@color/titleColor</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:textColorHint">@color/titleColor</item>
     </style>
