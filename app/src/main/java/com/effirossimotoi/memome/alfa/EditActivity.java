@@ -87,7 +87,7 @@ public class EditActivity extends AppCompatActivity {
             idColor = Color.WHITE;
             deleteButton.setEnabled(false);
         }
-        //TODO HARDCODED STRINGS
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
